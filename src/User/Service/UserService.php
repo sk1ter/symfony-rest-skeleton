@@ -38,13 +38,12 @@ class UserService
         throw new NotFoundHttpException("user not found");
     }
 
-    public function create(User $user, array $roles): User
+    public function create(User $user): User
     {
         if ($this->user_repository->findByUsername($user->getUserIdentifier()) !== null) {
             throw new BadRequestHttpException('user already exists');
         }
 
-        $user->setRoles($roles);
         $user->setPassword($this->passwordHasher->hashPassword($user, $user->getPassword()));
         return $this->user_repository->save($user);
     }

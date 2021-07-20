@@ -13,6 +13,8 @@ fos_rest:
   #    format_listener:
   #        rules:
   #            - { path: ^/api, prefer_extension: true, fallback_format: json, priorities: [ json, html ] }
+  serializer:
+    serialize_null: true
   body_listener:
     enabled: true
   format_listener:

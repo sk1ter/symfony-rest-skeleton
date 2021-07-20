@@ -22,6 +22,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     ]
     private int $id;
 
+    #[ORM\OneToOne(mappedBy: 'user', targetEntity: UserProfile::class, cascade: ['persist', 'remove'])]
+    private UserProfile $userProfile;
+
     #[ORM\Column(type: Types::STRING, length: 180, unique: true)]
     private string $username;
 
@@ -30,14 +33,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: Types::STRING)]
     private string $password;
-
-    /**
-     * User constructor.
-     */
-    public function __construct()
-    {
-        $this->id = 0;
-    }
 
     public function addRole(string $role): void
     {
@@ -60,6 +55,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         return $this->id;
     }
+
+    
 
     /**
      * @deprecated since Symfony 5.3, use getUserIdentifier instead
@@ -138,5 +135,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getUserProfile(): UserProfile
+    {
+        return $this->userProfile;
+    }
+
+    public function setUserProfile(UserProfile $userProfile): void
+    {
+        $this->userProfile = $userProfile;
     }
 }
