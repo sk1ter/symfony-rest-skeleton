@@ -12,7 +12,7 @@ class UserProfile
 {
     #[
         ORM\Id,
-        ORM\OneToOne(inversedBy: 'userProfile', targetEntity: User::class),
+        ORM\OneToOne(inversedBy: 'profile', targetEntity: User::class),
         ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id')
     ]
     private User $user;

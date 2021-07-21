@@ -13,6 +13,6 @@ class UserController extends AbstractController
     #[Route('', methods: ['GET'])]
     public function info(): Response
     {
-        return $this->respond(new UserModel($this->getUser()));
+        return $this->respond(UserModel::fromEntity($this->getUser()));
     }
 }

@@ -70,7 +70,7 @@ class UserCreateCommand extends Command
         $user_profile->setLastName($lastname);
         $user_profile->setUser($user);
 
-        $user->setUserProfile($user_profile);
+        $user->setProfile($user_profile);
 
         if ($this->userService->create($user)) {
             return Command::SUCCESS;

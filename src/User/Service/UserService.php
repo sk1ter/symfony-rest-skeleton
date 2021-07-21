@@ -3,6 +3,9 @@
 namespace App\User\Service;
 
 use App\User\Entity\User;
+use App\Common\Data\Pageable;
+use App\User\Model\UserModel;
+use App\Common\Model\PageableModel;
 use App\User\Repository\UserRepository;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
@@ -66,5 +69,16 @@ class UserService
         $user->removeRole($role);
 
         return $this->user_repository->save($user);
+    }
+
+    public function getAllByPagination(Pageable $pageable): PageableModel
+    {
+        return $pageable->create(
+            $this->user_repository
+                ->createQueryBuilder('user')
+                ->leftJoin('user.profile', 'profile')
+                ->getQuery(),
+            new UserModel()
+        );
     }
 }

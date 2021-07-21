@@ -23,7 +23,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private int $id;
 
     #[ORM\OneToOne(mappedBy: 'user', targetEntity: UserProfile::class, cascade: ['persist', 'remove'])]
-    private UserProfile $userProfile;
+    private UserProfile $profile;
 
     #[ORM\Column(type: Types::STRING, length: 180, unique: true)]
     private string $username;
@@ -56,7 +56,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->id;
     }
 
-    
+    public function setId(int $id): void
+    {
+        $this->id = $id;
+    }
 
     /**
      * @deprecated since Symfony 5.3, use getUserIdentifier instead
@@ -137,13 +140,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // $this->plainPassword = null;
     }
 
-    public function getUserProfile(): UserProfile
+    public function getProfile(): UserProfile
     {
-        return $this->userProfile;
+        return $this->profile;
     }
 
-    public function setUserProfile(UserProfile $userProfile): void
+    public function setProfile(UserProfile $profile): void
     {
-        $this->userProfile = $userProfile;
+        $this->profile = $profile;
     }
 }
