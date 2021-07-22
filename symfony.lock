@@ -147,6 +147,9 @@
             "config/packages/lexik_jwt_authentication.yaml"
         ]
     },
+    "myclabs/php-enum": {
+        "version": "1.8.3"
+    },
     "namshi/jose": {
         "version": "7.2.3"
     },
@@ -352,6 +355,9 @@
     },
     "symfony/security-http": {
         "version": "v5.3.3"
+    },
+    "symfony/serializer": {
+        "version": "v5.3.2"
     },
     "symfony/service-contracts": {
         "version": "v2.4.0"
