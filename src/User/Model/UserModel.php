@@ -8,9 +8,20 @@ use App\Common\Model\IMapperModel;
 
 class UserModel implements IMapperModel
 {
+    private int $id;
     private string $username;
     private array $roles;
     private UserProfileModel $profile;
+
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    public function setId(int $id): void
+    {
+        $this->id = $id;
+    }
 
     public function getUsername(): string
     {
@@ -46,6 +57,7 @@ class UserModel implements IMapperModel
     {
         $model = new self();
 
+        $model->setId($entity->getId());
         $model->setUsername($entity->getUserIdentifier());
         $model->setRoles($entity->getRoles());
         $model->setProfile(UserProfileModel::fromEntity($entity->getProfile()));
